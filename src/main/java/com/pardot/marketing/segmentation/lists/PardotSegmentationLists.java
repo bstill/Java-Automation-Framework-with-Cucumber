@@ -12,12 +12,12 @@ public class PardotSegmentationLists {
 
     private String pageTitleText = "Lists";
 
-    private String addListButtonId = "listxistx_link_create";
+    private By addListButton = By.id("listxistx_link_create");
 
-    private String listsFilterFieldName = "table_filter";
-    private String listsTableId = "listx_table";
+    private By listsFilterField = By.name("table_filter");
+    private By listsTable = By.id("listx_table");
 
-    private String waitIndicatorId = "indicator";
+    private By waitIndicator = By.id("indicator");
 
     public PardotSegmentationLists(Reporting reporting) {
         this.reporting = reporting;
@@ -26,7 +26,7 @@ public class PardotSegmentationLists {
     public void isSegmentationListsPageLoaded(Selenium selenium) {
         reporting.writeInfo("---> Verify Segmentation Lists Page Loaded");
 
-        selenium.waitElementInvisible(By.id(waitIndicatorId));
+        selenium.waitElementInvisible(waitIndicator);
 
         reporting.writeInfo("-----> Verify Sign In Page Title is: " + pageTitleText);
         if (!selenium.getTitle().contains(pageTitleText)) {
@@ -39,19 +39,19 @@ public class PardotSegmentationLists {
     public void clickAddListButton(Selenium selenium) {
         reporting.writeStep("---> Open List Information");
         reporting.writeInfo("-----> Click Add List Button");
-        selenium.click(By.id(addListButtonId));
+        selenium.click(addListButton);
     }
 
     public void isListExist(Selenium selenium, String listName) {
         reporting.writeInfo("---> Verify List Exists");
 
         reporting.writeInfo("-----> Search for List: " + listName);
-        selenium.clear(By.name(listsFilterFieldName));
-        selenium.sendKeys(By.name(listsFilterFieldName), listName);
+        selenium.clear(listsFilterField);
+        selenium.sendKeys(listsFilterField, listName);
 
-        selenium.waitElementInvisible(By.id(waitIndicatorId));
+        selenium.waitElementInvisible(waitIndicator);
 
-        List<WebElement> elements = selenium.findElements(By.id(listsTableId), By.tagName("tr"));
+        List<WebElement> elements = selenium.findElements(listsTable, By.tagName("tr"));
 
         for(WebElement e : elements){
             if (selenium.getText(e).contains(listName)) {
@@ -67,12 +67,12 @@ public class PardotSegmentationLists {
         reporting.writeInfo("---> Verify List Does Not Exists");
 
         reporting.writeInfo("-----> Search for List: " + listName);
-        selenium.clear(By.name(listsFilterFieldName));
-        selenium.sendKeys(By.name(listsFilterFieldName), listName);
+        selenium.clear(listsFilterField);
+        selenium.sendKeys(listsFilterField, listName);
 
-        selenium.waitElementInvisible(By.id(waitIndicatorId));
+        selenium.waitElementInvisible(waitIndicator);
 
-        List<WebElement> elements = selenium.findElements(By.id(listsTableId), By.tagName("tr"));
+        List<WebElement> elements = selenium.findElements(listsTable, By.tagName("tr"));
 
         for(WebElement e : elements){
             if (selenium.getText(e).contains(listName)) {
@@ -87,13 +87,13 @@ public class PardotSegmentationLists {
         reporting.writeStep("---> Select List");
 
         reporting.writeInfo("-----> Search for List: " + listName);
-        selenium.clear(By.name(listsFilterFieldName));
-        selenium.sendKeys(By.name(listsFilterFieldName), listName);
+        selenium.clear(listsFilterField);
+        selenium.sendKeys(listsFilterField, listName);
 
-        selenium.waitElementInvisible(By.id(waitIndicatorId));
+        selenium.waitElementInvisible(waitIndicator);
 
         reporting.writeInfo("-----> Click List");
-        selenium.click(selenium.findChildElement(By.id(listsTableId), By.linkText(listName)));
+        selenium.click(selenium.findChildElement(listsTable, By.linkText(listName)));
     }
 
 

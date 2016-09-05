@@ -7,9 +7,9 @@ import org.openqa.selenium.By;
 public class PardotProspect {
     private Reporting reporting;
 
-    private String listMenuButtonLinkText = "Lists";
+    private By listMenuButton = By.linkText("Lists");
 
-    private String waitIndicatorId = "indicator";
+    private By waitIndicator = By.id("indicator");
 
     public PardotProspect(Reporting reporting) {
         this.reporting = reporting;
@@ -18,7 +18,7 @@ public class PardotProspect {
     public void isProspectPageLoaded(Selenium selenium, String pageTitleText) {
         reporting.writeInfo("---> Verify Prospect Page Loaded");
 
-        selenium.waitElementInvisible(By.id(waitIndicatorId));
+        selenium.waitElementInvisible(waitIndicator);
 
         reporting.writeInfo("-----> Verify Prospect Page Title is: " + pageTitleText);
         if (!selenium.getTitle().contains(pageTitleText)) {
@@ -30,7 +30,7 @@ public class PardotProspect {
 
     public void clickListsMenu (Selenium selenium) {
         reporting.writeStep("---> Click Lists Menu Button");
-        selenium.click(By.linkText(listMenuButtonLinkText));
+        selenium.click(listMenuButton);
     }
 
 

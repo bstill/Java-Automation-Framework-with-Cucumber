@@ -1,6 +1,7 @@
 package cucumber.test;
 
 import com.api.RandomData;
+import com.api.Reporting;
 import com.api.Selenium;
 import com.browser.PardotBrowser;
 import com.pardot.dashboard.PardotDashboard;
@@ -19,6 +20,7 @@ import com.pardot.marketing.segmentation.lists.listinformation.PardotListInforma
 import com.pardot.marketing.segmentation.lists.listinformation.selectfolder.PardotSelectFolder;
 import com.pardot.marketing.segmentation.lists.PardotSegmentationLists;
 
+import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
@@ -26,11 +28,15 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
+import java.io.IOException;
+
 public class TestSteps {
     private String pardotUsername = "pardot.applicant@pardot.com";
     private String pardotPassword = "Applicant2012";
     private String pardotUrl = "https://pi.pardot.com";
     private Selenium selenium;
+
+    private static Reporting reporting;
 
     private String folder;
     private String list;
@@ -55,28 +61,32 @@ public class TestSteps {
     private PardotEmailSending emailSending;
 
     public TestSteps() {
+        reporting = new Reporting();
+
         random = new RandomData();
 
-        browser = new PardotBrowser();
-        login = new PardotLogin();
-        dashboard = new PardotDashboard();
-        segmentationLists = new PardotSegmentationLists();
-        segmentationListInformation = new PardotListInformation();
-        selectFolder = new PardotSelectFolder();
-        segmentationList = new PardotSegmentationList();
-        prospects = new PardotProspects();
-        createProspect = new PardotCreateProspect();
-        prospect = new PardotProspect();
-        prospectLists = new PardotProspectLists();
-        emails = new PardotEmails();
-        basicEmailInformation = new PardotBasicEmailInformation();
-        selectCampaign = new PardotSelectCampaign();
-        emailBuilding = new PardotEmailBuilding();
-        emailSending = new PardotEmailSending();
+        browser = new PardotBrowser(reporting);
+        login = new PardotLogin(reporting);
+        dashboard = new PardotDashboard(reporting);
+        segmentationLists = new PardotSegmentationLists(reporting);
+        segmentationListInformation = new PardotListInformation(reporting);
+        selectFolder = new PardotSelectFolder(reporting);
+        segmentationList = new PardotSegmentationList(reporting);
+        prospects = new PardotProspects(reporting);
+        createProspect = new PardotCreateProspect(reporting);
+        prospect = new PardotProspect(reporting);
+        prospectLists = new PardotProspectLists(reporting);
+        emails = new PardotEmails(reporting);
+        basicEmailInformation = new PardotBasicEmailInformation(reporting);
+        selectCampaign = new PardotSelectCampaign(reporting);
+        emailBuilding = new PardotEmailBuilding(reporting);
+        emailSending = new PardotEmailSending(reporting);
     }
 
     @Before
-    public void beforeScenario() {
+    public void beforeScenario(Scenario scenario) {
+        reporting.startTest(scenario.getName(), scenario.getName());
+
         selenium = null;
 
         selenium = browser.startBrowser(pardotUrl);
@@ -85,11 +95,16 @@ public class TestSteps {
     }
 
     @After
-    public void afterScenario () throws InterruptedException {
+    public void afterScenario () throws InterruptedException, IOException {
         dashboard.signOut(selenium);
         login.isLogInPageLoaded(selenium);
 
         browser.stopBrowser(selenium);
+
+        reporting.endTest();
+        reporting.flush();
+
+        //reporting.close();        //need global After to close this after all tests have run, but doesn't exist in cucumber yet
     }
 
     @Given("^I am logged into Pardot$")

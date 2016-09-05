@@ -10,11 +10,11 @@ import java.util.List;
 public class PardotSegmentationList {
     private Reporting reporting;
 
-    private String editListLinkLinkText = "Edit";
+    private By editListLink = By.linkText("Edit");
 
-    private String listsContainerId= "listxProspect_table";
+    private By listsContainer= By.id("listxProspect_table");
 
-    private String waitIndicatorId = "indicator";
+    private By waitIndicator = By.id("indicator");
 
     public PardotSegmentationList(Reporting reporting) {
         this.reporting = reporting;
@@ -23,7 +23,7 @@ public class PardotSegmentationList {
     public void isListPageLoaded(Selenium selenium, String pageTitleText) {
         reporting.writeInfo("---> Verify List Page Loaded");
 
-        selenium.waitElementInvisible(By.id(waitIndicatorId));
+        selenium.waitElementInvisible(waitIndicator);
 
         reporting.writeInfo("-----> Verify List Page Title is: " + pageTitleText);
         if (!selenium.getTitle().contains(pageTitleText)) {
@@ -37,13 +37,13 @@ public class PardotSegmentationList {
         reporting.writeStep("---> Open List Information");
 
         reporting.writeInfo("-----> Click Edit List Button");
-        selenium.click(By.linkText(editListLinkLinkText));
+        selenium.click(editListLink);
     }
 
     public void isListProspectExist(Selenium selenium, String prospectName) {
         reporting.writeInfo("---> Verify Prospect Added to List: " + prospectName);
 
-        List<WebElement> elements = selenium.findElements(By.id(listsContainerId), By.tagName("tr"));
+        List<WebElement> elements = selenium.findElements(listsContainer, By.tagName("tr"));
 
         for(WebElement e : elements){
             List<WebElement> cells = selenium.findElements(e, By.tagName("td"));

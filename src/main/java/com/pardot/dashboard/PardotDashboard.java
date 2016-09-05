@@ -7,20 +7,20 @@ import org.openqa.selenium.By;
 public class PardotDashboard {
     private Reporting reporting;
 
-    private String userAccountMenuDropdownId = "menu-account";
+    private By userAccountMenuDropdown = By.id("menu-account");
     private String pageTitleText = "Dashboard";
 
-    private String marketingMenuId = "mark-tog";
-    private String marketingSegmentationMenuLinkText = "Segmentation";
-    private String marketingSegmentationListsMenuLinkText = "Lists";
-    private String marketingEmailsLinkText = "Emails";
+    private By marketingMenu = By.id("mark-tog");
+    private By marketingSegmentationMenu = By.linkText("Segmentation");
+    private By marketingSegmentationListsMenu = By.linkText("Lists");
+    private By marketingEmails = By.linkText("Emails");
 
-    private String prospectsMenuId = "pro-tog";
-    private String prospectsProspectListLinkText = "Prospect List";
+    private By prospectsMenu = By.id("pro-tog");
+    private By prospectsProspectList = By.linkText("Prospect List");
 
-    private String signOutLinkText = "Sign Out";
+    private By signOut = By.linkText("Sign Out");
 
-    private String waitIndicatorId = "indicator";
+    private By waitIndicator = By.id("indicator");
 
     public PardotDashboard(Reporting reporting) {
         this.reporting = reporting;
@@ -28,7 +28,7 @@ public class PardotDashboard {
 
     public void isDashboardPageLoaded(Selenium selenium) {
         reporting.writeInfo("---> Verify Dashboard Page Loaded");
-        selenium.waitElementInvisible(By.id(waitIndicatorId));
+        selenium.waitElementInvisible(waitIndicator);
 
         reporting.writeInfo("-----> Verify Dashboard Page Title is: " + pageTitleText);
         if (!selenium.getTitle().contains(pageTitleText)) {
@@ -42,47 +42,47 @@ public class PardotDashboard {
         reporting.writeStep("---> Navigate to Marketing\\Emails");
 
         reporting.writeInfo("-----> Hover Over Marketing Menu Item");
-        selenium.mouseHover(By.id(marketingMenuId));
+        selenium.mouseHover(marketingMenu);
 
         Thread.sleep(500);
         reporting.writeInfo("-----> Click Emails Menu Item");
-        selenium.click(By.linkText(marketingEmailsLinkText));
+        selenium.click(marketingEmails);
     }
 
     public void clickMarketingSegmentationLists(Selenium selenium) throws InterruptedException {
         reporting.writeStep("---> Navigate to Marketing\\Segmentation\\Lists");
 
         reporting.writeInfo("-----> Hover Over Marketing Menu Item");
-        selenium.mouseHover(By.id(marketingMenuId));
+        selenium.mouseHover(marketingMenu);
 
         reporting.writeInfo("-----> Hover Over Segmentation Menu Item");
-        selenium.mouseHover(By.linkText(marketingSegmentationMenuLinkText));
+        selenium.mouseHover(marketingSegmentationMenu);
 
         Thread.sleep(500);
         reporting.writeInfo("-----> Click Lists Menu Item");
-        selenium.click(By.linkText(marketingSegmentationListsMenuLinkText));
+        selenium.click(marketingSegmentationListsMenu);
     }
 
     public void clickProspectsProspectList(Selenium selenium) throws InterruptedException {
         reporting.writeStep("---> Navigate to Prospects\\Prospect List");
 
         reporting.writeInfo("-----> Hover Over Prospects Menu Item");
-        selenium.mouseHover(By.id(prospectsMenuId));
+        selenium.mouseHover(prospectsMenu);
 
         Thread.sleep(500);
         reporting.writeInfo("-----> Click Prospects List Menu Item");
-        selenium.click(By.linkText(prospectsProspectListLinkText));
+        selenium.click(prospectsProspectList);
     }
 
     public void signOut(Selenium selenium) throws InterruptedException {
         reporting.writeStep("---> Sign Out of Pardot");
 
         reporting.writeInfo("-----> Hover Over User Account Menu Item");
-        selenium.mouseHover(By.id(userAccountMenuDropdownId));
+        selenium.mouseHover(userAccountMenuDropdown);
 
         Thread.sleep(500);
         reporting.writeInfo("-----> Click Sign Out Link");
-        selenium.click(By.linkText(signOutLinkText));
+        selenium.click(signOut);
     }
 
 }

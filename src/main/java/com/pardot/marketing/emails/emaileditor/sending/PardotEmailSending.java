@@ -10,22 +10,22 @@ import java.util.List;
 public class PardotEmailSending {
     private Reporting reporting;
 
-    private String emailNameHeaderId = "control_name";
+    private By emailNameHeader = By.id("control_name");
     private String pageTitleText = "Sending";
 
-    private String sendNowButtonName = "Send Now";
+    private By sendNowButton = By.name("Send Now");
 
-    private String listsDropdownId = "email-wizard-list-select";
-    private String listsSearchDivClass = "chzn-search";
-    private String listsSearchResultsDropdownClass = "chzn-results";
+    private By listsDropdown = By.id("email-wizard-list-select");
+    private By listsSearchDiv = By.className("chzn-search");
+    private By listsSearchResultsDropdown = By.className("chzn-results");
 
-    private String listsSelectedContainerClass = "selected-lists";
+    private By listsSelectedContainer = By.className("selected-lists");
 
-    private String senderSelectName = "a_sender[]";
+    private By senderSelect = By.name("a_sender[]");
 
-    private String subjectFieldName = "subject_a";
+    private By subjectField = By.name("subject_a");
 
-    private String waitIndicatorId = "indicator";
+    private By waitIndicator = By.id("indicator");
 
     public PardotEmailSending(Reporting reporting) {
         this.reporting = reporting;
@@ -34,7 +34,7 @@ public class PardotEmailSending {
     public void isEmailSendingPageLoaded(Selenium selenium, String emailName) {
         reporting.writeInfo("---> Verify Email Sending Page Loaded");
 
-        selenium.waitElementInvisible(By.id(waitIndicatorId));
+        selenium.waitElementInvisible(waitIndicator);
 
         reporting.writeInfo("-----> Verify Email Sending Page Title Contains: " + pageTitleText);
         if (!selenium.getTitle().contains(pageTitleText)) {
@@ -44,7 +44,7 @@ public class PardotEmailSending {
         }
 
         reporting.writeInfo("-----> Verify Email Name is: " + emailName);
-        if (!selenium.getText(By.id(emailNameHeaderId)).contains(emailName)) {
+        if (!selenium.getText(emailNameHeader).contains(emailName)) {
             selenium.throwRuntimeException("Email Name is Not: " + emailName, true);
         } else {
             reporting.writePass("Email Name Found");
@@ -55,7 +55,7 @@ public class PardotEmailSending {
         reporting.writeStep("---> Click Send Now Button");
 
         reporting.writeInfo("-----> *Email Functionality Disabled");
-        selenium.click(By.linkText(sendNowButtonName));
+        selenium.click(sendNowButton);
     }
 
     public void enterEmailToFrom(Selenium selenium, String listName, String sender, String subject) {
@@ -63,26 +63,26 @@ public class PardotEmailSending {
 
         reporting.writeInfo("-----> Enter To: " + listName);
         reporting.writeInfo("-------> Open List Dropdown");
-        selenium.click(selenium.findChildElement(selenium.findElement(By.id(listsDropdownId)), By.tagName("b")));
+        selenium.click(selenium.findChildElement(selenium.findElement(listsDropdown), By.tagName("b")));
 
         reporting.writeInfo("-------> Search for List: " + listName);
-        selenium.sendKeys(selenium.findChildElement(selenium.findElement(By.className(listsSearchDivClass)), By.tagName("input")), listName);
+        selenium.sendKeys(selenium.findChildElement(selenium.findElement(listsSearchDiv), By.tagName("input")), listName);
 
         reporting.writeInfo("-------> Select List");
-        selenium.doubleClick(By.className(listsSearchResultsDropdownClass));
+        selenium.doubleClick(listsSearchResultsDropdown);
         isListExist(selenium, listName);
 
         reporting.writeInfo("-----> Enter From: " + sender);
-        selenium.selectByVisibleText(By.name(senderSelectName), sender);
+        selenium.selectByVisibleText(senderSelect, sender);
 
         reporting.writeInfo("-----> Enter Subject: " + subject);
-        selenium.clear(By.name(subjectFieldName));
-        selenium.sendKeys(By.name(subjectFieldName), subject);
+        selenium.clear(subjectField);
+        selenium.sendKeys(subjectField, subject);
     }
 
     public void isListExist(Selenium selenium, String listName) {
         reporting.writeInfo("-------> Verify List Added to Email To Field: " + listName);
-        List<WebElement> elements = selenium.findElements(By.className(listsSelectedContainerClass), By.tagName("li"));
+        List<WebElement> elements = selenium.findElements(listsSelectedContainer, By.tagName("li"));
 
         for(WebElement e : elements){
             if (selenium.getAttribute(e, "data-name").equals(listName)) {

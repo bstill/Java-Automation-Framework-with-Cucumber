@@ -101,9 +101,9 @@ public class RestApi {
         String resp =  http.readScanner();
         http.closeScanner();
 
-        response =  resp;
+       // response =  resp;
 
-        json.open(response);
+       // json.open(response);
 
 
 

@@ -7,9 +7,9 @@ import org.openqa.selenium.By;
 public class PardotLogin {
     private Reporting reporting;
 
-    private String emailAddressFieldId = "email_address";
-    private String passwordFieldId = "password";
-    private String logInButtonName = "commit";
+    private By emailAddressField = By.id("email_address");
+    private By passwordField = By.id("password");
+    private By logInButton = By.name("commit");
 
     private String pageTitleText = "Sign In";
 
@@ -32,13 +32,13 @@ public class PardotLogin {
         reporting.writeStep("---> Perform Log In");
 
         reporting.writeInfo("-----> Enter Email/Username: " + userName  );
-        selenium.sendKeys(By.id(emailAddressFieldId), userName);
+        selenium.sendKeys(emailAddressField, userName);
 
         reporting.writeInfo("-----> Enter Password");
-        selenium.sendKeys(By.id(passwordFieldId), password);
+        selenium.sendKeys(passwordField, password);
 
         reporting.writeInfo("-----> Click Log In Button");
-        selenium.click(By.name(logInButtonName));
+        selenium.click(logInButton);
     }
 
 }

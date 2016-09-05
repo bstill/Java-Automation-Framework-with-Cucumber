@@ -12,14 +12,14 @@ public class PardotProspects {
 
     private String pageTitleText = "Prospects";
 
-    private String addProspectButtonId = "pr_link_create";
+    private By addProspectButtonId = By.id("pr_link_create");
 
-    private String prospectsFilterDateRangeDropdownId = "dateRange_pr";
+    private By prospectsFilterDateRangeDropdownId = By.id("dateRange_pr");
 
-    private String prospectsFilterFieldName = "table_filter";
-    private String prospectsTableId = "prospect_table";
+    private By prospectsFilterFieldName = By.name("table_filter");
+    private By prospectsTableId = By.id("prospect_table");
 
-    private String waitIndicatorId = "indicator";
+    private By waitIndicatorId = By.id("indicator");
 
     public PardotProspects(Reporting reporting) {
         this.reporting = reporting;
@@ -28,7 +28,7 @@ public class PardotProspects {
     public void isProspectsPageLoaded(Selenium selenium) {
         reporting.writeInfo("---> Verify Prospects Page Loaded");
 
-        selenium.waitElementInvisible(By.id(waitIndicatorId));
+        selenium.waitElementInvisible(waitIndicatorId);
 
         reporting.writeInfo("-----> Verify Prospects Page Title is: " + pageTitleText);
         if (!selenium.getTitle().contains(pageTitleText)) {
@@ -42,20 +42,20 @@ public class PardotProspects {
         reporting.writeStep("---> Open Create Prospect Page");
 
         reporting.writeInfo("-----> Click Add Prospect Button");
-        selenium.click(By.id(addProspectButtonId));
+        selenium.click(addProspectButtonId);
     }
 
     public void isProspectExist(Selenium selenium, String prospectName) {
         reporting.writeInfo("---> Verify Prospect Exists");
 
         reporting.writeInfo("-----> Search for Prospect: " + prospectName);
-        selenium.selectByVisibleText(By.id(prospectsFilterDateRangeDropdownId), "Today");
-        selenium.clear(By.name(prospectsFilterFieldName));
-        selenium.sendKeys(By.name(prospectsFilterFieldName), prospectName);
+        selenium.selectByVisibleText(prospectsFilterDateRangeDropdownId, "Today");
+        selenium.clear(prospectsFilterFieldName);
+        selenium.sendKeys(prospectsFilterFieldName, prospectName);
 
-        selenium.waitElementInvisible(By.id(waitIndicatorId));
+        selenium.waitElementInvisible(waitIndicatorId);
 
-        List<WebElement> elements = selenium.findElements(By.id(prospectsTableId), By.tagName("tr"));
+        List<WebElement> elements = selenium.findElements(prospectsTableId, By.tagName("tr"));
 
         for(WebElement e : elements){
             if (selenium.getText(e).contains(prospectName)) {

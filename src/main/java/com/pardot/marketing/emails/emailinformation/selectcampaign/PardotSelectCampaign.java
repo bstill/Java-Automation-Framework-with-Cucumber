@@ -12,14 +12,14 @@ public class PardotSelectCampaign {
 
     private RandomData random = new RandomData();
 
-    private String selectFolderModalTitleXpath = ".//*[@id='asset-chooser-app-modal']/div[1]/h3";
+    private By selectFolderModalTitle = By.xpath(".//*[@id='asset-chooser-app-modal']/div[1]/h3");
     private String modalTitleText = "Select A Campaign";
 
-    private String campaignListContainerId = "folder-contents";
+    private By campaignListContainer = By.id("folder-contents");
 
-    private String chooseSelectedButtonId = "select-asset";
+    private By chooseSelectedButton = By.id("select-asset");
 
-    private String waitIndicatorId = "indicator";
+    private By waitIndicator = By.id("indicator");
 
     public PardotSelectCampaign(Reporting reporting) {
         this.reporting = reporting;
@@ -28,10 +28,10 @@ public class PardotSelectCampaign {
     public void isSelectCampaignModalLoaded(Selenium selenium) {
         reporting.writeInfo("---> Verify Select A Campaign Loaded");
 
-        selenium.waitElementInvisible(By.id(waitIndicatorId));
+        selenium.waitElementInvisible(waitIndicator);
 
         reporting.writeInfo("-----> Verify Select A Campaign Modal Title is: " + modalTitleText);
-        if (!selenium.getText(By.xpath(selectFolderModalTitleXpath)).contains(modalTitleText)) {
+        if (!selenium.getText(selectFolderModalTitle).contains(modalTitleText)) {
             selenium.throwRuntimeException("Page Title is Not: " + modalTitleText, true);
         } else {
             reporting.writePass("Page Title Found");
@@ -41,7 +41,7 @@ public class PardotSelectCampaign {
     public String selectRandomContainer(Selenium selenium) {
         reporting.writeStep("---> Select Random Container");
 
-        List<WebElement> elements = selenium.findElements(By.id(campaignListContainerId), By.tagName("h4"));
+        List<WebElement> elements = selenium.findElements(campaignListContainer, By.tagName("h4"));
 
         Integer index = random.getRandomNumber(elements.size());
         selenium.click(elements.get(index));
@@ -51,7 +51,7 @@ public class PardotSelectCampaign {
 
     public void clickChooseSelectedButton(Selenium selenium) {
         reporting.writeStep("---> Click Choose Selected Button");
-        selenium.click(By.id(chooseSelectedButtonId));
+        selenium.click(chooseSelectedButton);
     }
 
 

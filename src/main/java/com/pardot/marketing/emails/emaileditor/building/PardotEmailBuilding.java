@@ -7,12 +7,12 @@ import org.openqa.selenium.By;
 public class PardotEmailBuilding {
     private Reporting reporting;
 
-    private String emailNameHeaderId = "control_name";
+    private By emailNameHeader = By.id("control_name");
     private String pageTitleText = "Building";
 
-    private String headerSendingButtonId = "flow_sending";
+    private By headerSendingButton = By.id("flow_sending");
 
-    private String waitIndicatorId = "indicator";
+    private By waitIndicator = By.id("indicator");
 
     public PardotEmailBuilding(Reporting reporting) {
         this.reporting = reporting;
@@ -21,7 +21,7 @@ public class PardotEmailBuilding {
     public void isEmailBuildingPageLoaded(Selenium selenium, String emailName) {
         reporting.writeInfo("---> Verify Email Building Page Loaded");
 
-        selenium.waitElementInvisible(By.id(waitIndicatorId));
+        selenium.waitElementInvisible(waitIndicator);
 
         reporting.writeInfo("-----> Verify Email Building Page Title Contains: " + pageTitleText);
         if (!selenium.getTitle().contains(pageTitleText)) {
@@ -31,7 +31,7 @@ public class PardotEmailBuilding {
         }
 
         reporting.writeInfo("-----> Verify Email Name is: " + emailName);
-        if (!selenium.getText(By.id(emailNameHeaderId)).contains(emailName)) {
+        if (!selenium.getText(emailNameHeader).contains(emailName)) {
             selenium.throwRuntimeException("Email is Not: " + emailName, true);
         } else {
             reporting.writePass("Email Name Found");
@@ -40,7 +40,7 @@ public class PardotEmailBuilding {
 
     public void clickSendingButton(Selenium selenium) {
         reporting.writeStep("---> Click Header Sending Button");
-        selenium.click(By.id(headerSendingButtonId));
+        selenium.click(headerSendingButton);
     }
 
 }

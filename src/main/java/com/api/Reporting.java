@@ -27,62 +27,62 @@ public class Reporting {
     }
 
     public void writeInfo(String message) {
-        writeLogEntry(INFO, message, false);
+        writeLogEntry(INFO, message);
     }
 
     public void writeStep(String message) {
-        writeLogEntry(INFO, message, true);
+        writeLogEntry(INFO, message);
     }
 
     public void writeError(String message) {
-        writeLogEntry(ERROR, message, false);
+        writeLogEntry(ERROR, message);
     }
 
     public void writeError(String message, String screenshot) {
-        writeLogEntry(ERROR, message, screenshot, false);
+        writeLogEntry(ERROR, message, screenshot);
     }
 
     public void writePass(String message) {
-        writeLogEntry(PASS, message, false);
+        writeLogEntry(PASS, message);
     }
 
     public void writePass(String message, String screenshot) {
-        writeLogEntry(PASS, message, screenshot, false);
+        writeLogEntry(PASS, message, screenshot);
     }
 
     public void writeFail(String message) {
-        writeLogEntry(FAIL, message, false);
+        writeLogEntry(FAIL, message);
     }
 
     public void writeFail(String message, String screenshot) {
-        writeLogEntry(FAIL, message, screenshot, false);
+        writeLogEntry(FAIL, message, screenshot);
     }
 
     public void writeWarning(String message) {
-        writeLogEntry(WARNING, message, false);
+        writeLogEntry(WARNING, message);
     }
 
     public void writeWarning(String message, String screenshot) {
-        writeLogEntry(WARNING, message, screenshot, false);
+        writeLogEntry(WARNING, message, screenshot);
     }
 
     public void writeFatal(String message) {
-        writeLogEntry(FATAL, message, false);
+        writeLogEntry(FATAL, message);
     }
 
     public void writeFatal(String message, String screenshot) {
-        writeLogEntry(FATAL, message, screenshot, false);
+        writeLogEntry(FATAL, message, screenshot);
     }
 
     public void writeSkip(String message) {
-        writeLogEntry(SKIP, message, false);
+        writeLogEntry(SKIP, message);
     }
 
     public void writeSkip(String message, String screenshot) {
-        writeLogEntry(SKIP, message, screenshot, false);
+        writeLogEntry(SKIP, message, screenshot);
     }
 
-    private void writeLogEntry(LogStatus logStatus, String message, Boolean isStep) {
+    private void writeLogEntry(LogStatus logStatus, String message) {
         if (logStatus == FAIL) {
              message = "FAIL: " + message;
         }
@@ -99,7 +99,7 @@ public class Reporting {
         testReport.log(logStatus, message);
     }
 
-    private void writeLogEntry(LogStatus logStatus, String message, String screenshot, Boolean isStep) {
+    private void writeLogEntry(LogStatus logStatus, String message, String screenshot) {
         if (logStatus == FAIL) {
             message = "FAIL: " + message;
         }

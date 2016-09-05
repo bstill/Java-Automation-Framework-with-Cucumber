@@ -8,8 +8,8 @@ public class PardotEmails {
     private Reporting reporting;
 
     private String pageTitleText = "Emails";
-    private String sendListEmailButtonXpath = ".//*[@id='em_module']/div[1]/span/a";
-    private String waitIndicatorId = "indicator";
+    private By sendListEmailButton = By.xpath(".//*[@id='em_module']/div[1]/span/a");
+    private By waitIndicator = By.id("indicator");
 
     public PardotEmails(Reporting reporting) {
         this.reporting = reporting;
@@ -18,7 +18,7 @@ public class PardotEmails {
     public void isEmailsPageLoaded(Selenium selenium) {
         reporting.writeInfo("---> Verify Emails Page Loaded");
 
-        selenium.waitElementInvisible(By.id(waitIndicatorId));
+        selenium.waitElementInvisible(waitIndicator);
 
         reporting.writeInfo("-----> Verify Emails Page Title is: " + pageTitleText);
         if (!selenium.getTitle().contains(pageTitleText)) {
@@ -32,7 +32,7 @@ public class PardotEmails {
         reporting.writeStep("---> Open Basic Email Information Modal");
 
         reporting.writeInfo("-----> Click Send List Email Button");
-        selenium.click(By.xpath(sendListEmailButtonXpath));
+        selenium.click(sendListEmailButton);
     }
 
 

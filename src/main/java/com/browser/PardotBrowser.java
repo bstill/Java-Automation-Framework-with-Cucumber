@@ -1,13 +1,17 @@
 package com.browser;
 
+import com.api.Reporting;
 import com.api.Selenium;
 
 public class PardotBrowser {
-    public PardotBrowser() {
+    private Reporting reporting;
+
+    public PardotBrowser(Reporting reporting) {
+        this.reporting = reporting;
     }
 
     public Selenium startBrowser(String url) {
-        Selenium selenium = new Selenium();
+        Selenium selenium = new Selenium(reporting);
 
         selenium.start();
         selenium.goUrl(url);

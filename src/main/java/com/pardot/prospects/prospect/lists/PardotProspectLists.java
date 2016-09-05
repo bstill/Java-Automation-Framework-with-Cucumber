@@ -12,9 +12,9 @@ public class PardotProspectLists {
 
     private String pageTitleText = "Lists";
 
-    private String listsSelectedContainerClass = "selected-lists";
+    private By listsSelectedContainer = By.className("selected-lists");
 
-    private String waitIndicatorId = "indicator";
+    private By waitIndicator = By.id("indicator");
 
     public PardotProspectLists(Reporting reporting) {
         this.reporting = reporting;
@@ -23,7 +23,7 @@ public class PardotProspectLists {
     public void isProspectListsPageLoaded(Selenium selenium) {
         reporting.writeInfo("---> Verify Prospect Lists Page Loaded");
 
-        selenium.waitElementInvisible(By.id(waitIndicatorId));
+        selenium.waitElementInvisible(waitIndicator);
 
         reporting.writeInfo("-----> Verify Prospect Lists Page Title is: " + pageTitleText);
         if (!selenium.getTitle().contains(pageTitleText)) {
@@ -35,7 +35,7 @@ public class PardotProspectLists {
 
     public void isProspectListExist(Selenium selenium, String listName) {
         reporting.writeInfo("---> Verify List Added to Prospect: " + listName);
-        List<WebElement> elements = selenium.findElements(By.className(listsSelectedContainerClass), By.tagName("li"));
+        List<WebElement> elements = selenium.findElements(listsSelectedContainer, By.tagName("li"));
 
         for(WebElement e : elements){
             if (selenium.getAttribute(e, "data-name").equals(listName)) {
