@@ -26,11 +26,11 @@ public class PardotProspects {
     }
 
     public void isProspectsPageLoaded(Selenium selenium) {
-        reporting.writeInfo("---> Verify Prospects Page Loaded");
+        reporting.writeStep("Verify Prospects Page Loaded");
 
         selenium.waitElementInvisible(waitIndicatorId);
 
-        reporting.writeInfo("-----> Verify Prospects Page Title is: " + pageTitleText);
+        reporting.writeInfo("Verify Prospects Page Title is: " + pageTitleText);
         if (!selenium.getTitle().contains(pageTitleText)) {
             selenium.throwRuntimeException("Page Title is Not: " + pageTitleText, true);
         } else {
@@ -39,16 +39,16 @@ public class PardotProspects {
     }
 
     public void clickAddProspectButton(Selenium selenium) {
-        reporting.writeStep("---> Open Create Prospect Page");
+        reporting.writeStep("Open Create Prospect Page");
 
-        reporting.writeInfo("-----> Click Add Prospect Button");
+        reporting.writeInfo("Click Add Prospect Button");
         selenium.click(addProspectButtonId);
     }
 
     public void isProspectExist(Selenium selenium, String prospectName) {
-        reporting.writeInfo("---> Verify Prospect Exists");
+        reporting.writeStep("Verify Prospect Exists");
 
-        reporting.writeInfo("-----> Search for Prospect: " + prospectName);
+        reporting.writeInfo("Search for Prospect: " + prospectName);
         selenium.selectByVisibleText(prospectsFilterDateRangeDropdownId, "Today");
         selenium.clear(prospectsFilterFieldName);
         selenium.sendKeys(prospectsFilterFieldName, prospectName);

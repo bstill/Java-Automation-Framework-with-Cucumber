@@ -16,11 +16,11 @@ public class PardotProspect {
     }
 
     public void isProspectPageLoaded(Selenium selenium, String pageTitleText) {
-        reporting.writeInfo("---> Verify Prospect Page Loaded");
+        reporting.writeStep("Verify Prospect Page Loaded");
 
         selenium.waitElementInvisible(waitIndicator);
 
-        reporting.writeInfo("-----> Verify Prospect Page Title is: " + pageTitleText);
+        reporting.writeInfo("Verify Prospect Page Title is: " + pageTitleText);
         if (!selenium.getTitle().contains(pageTitleText)) {
             selenium.throwRuntimeException("Page Title is Not: " + pageTitleText, true);
         } else {
@@ -29,7 +29,8 @@ public class PardotProspect {
     }
 
     public void clickListsMenu (Selenium selenium) {
-        reporting.writeStep("---> Click Lists Menu Button");
+        reporting.writeStep("Open Lists Page");
+        reporting.writeInfo("Click Lists Menu Button");
         selenium.click(listMenuButton);
     }
 

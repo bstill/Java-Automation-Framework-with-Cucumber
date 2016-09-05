@@ -27,11 +27,11 @@ public class PardotBasicEmailInformation {
     }
 
     public void isBasicEmailInformationModalLoaded(Selenium selenium) {
-        reporting.writeInfo("---> Verify Email Information Loaded");
+        reporting.writeStep("Verify Email Information Loaded");
 
         selenium.waitElementInvisible(waitIndicator);
 
-        reporting.writeInfo("-----> Verify Email Information Modal Title is: " + modalTitleText);
+        reporting.writeInfo("Verify Email Information Modal Title is: " + modalTitleText);
         if (!selenium.getText(listInformationModalTitle).contains(modalTitleText)) {
             selenium.throwRuntimeException("Page Title is Not: " + modalTitleText, true);
         } else {
@@ -40,20 +40,20 @@ public class PardotBasicEmailInformation {
     }
 
     public void createEmail(Selenium selenium, String emailName, String emailType, Boolean useEmailTemplate) {
-        reporting.writeStep("---> Create Email");
+        reporting.writeStep("Create Email");
 
-        reporting.writeInfo("-----> Enter Email Name: " + emailName);
+        reporting.writeInfo("Enter Email Name: " + emailName);
         selenium.clear(nameField);
         selenium.sendKeys(nameField, emailName);
 
-        reporting.writeInfo("-----> Select Email Type: " + emailType);
+        reporting.writeInfo("Select Email Type: " + emailType);
         if (emailType.equals("Text")) {
             selenium.click(emailTypeText);
         } else {
             selenium.click(emailTypeHtml);
         }
 
-        reporting.writeInfo("-----> Select Use Email Template: " + useEmailTemplate.toString());
+        reporting.writeInfo("Select Use Email Template: " + useEmailTemplate.toString());
         if (useEmailTemplate) {
             if (!selenium.isSelected(useEmailTemplateCheckbox)) {
                 selenium.click(useEmailTemplateCheckbox);
@@ -66,17 +66,20 @@ public class PardotBasicEmailInformation {
     }
 
     public void clickSaveButton(Selenium selenium) {
-        reporting.writeStep("---> Save Basic Email Information");
+        reporting.writeStep("Save Basic Email Information");
+        reporting.writeInfo("Click Save Button");
         selenium.click(saveEmailButton);
     }
 
     public void clickChooseFolderButton(Selenium selenium) {
-        reporting.writeStep("---> Save Basic Email Information");
+        reporting.writeStep("Open Select Folder Modal");
+        reporting.writeInfo("Click Choose Button");
         selenium.click(chooseFolderButton);
     }
 
     public void isFolderSelected(Selenium selenium, String folderName) {
-        reporting.writeInfo("---> Verify Folder Field Contains Selected Folder: /" + folderName);
+        reporting.writeStep("Verify Folder Selected");
+        reporting.writeInfo("Verify Folder Field Contains Selected Folder: /" + folderName);
         if (!selenium.getText(folderField).equals("/" + folderName)) {
             selenium.throwRuntimeException("Folder Name is Not: /" + folderName, true);
         } else {
@@ -85,12 +88,14 @@ public class PardotBasicEmailInformation {
     }
 
     public void clickChooseCampaignButton(Selenium selenium) {
-        reporting.writeStep("---> Save Basic Email Information");
+        reporting.writeStep("Open Select Campaign Modal");
+        reporting.writeInfo("Click Choose Button");
         selenium.click(chooseCampaignButton);
     }
 
     public void isCampaignSelected(Selenium selenium, String campaignName) {
-        reporting.writeInfo("---> Verify Campaign Field Contains Selected Campaign: " + campaignName);
+        reporting.writeStep("Verify Campaign Selected");
+        reporting.writeInfo("Verify Campaign Field Contains Selected Campaign: " + campaignName);
         if (!selenium.getText(campaignField).equals(campaignName)) {
             selenium.throwRuntimeException("Campaign Name is Not: " + campaignName, true);
         } else {

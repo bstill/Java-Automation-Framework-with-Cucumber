@@ -24,11 +24,11 @@ public class PardotSegmentationLists {
     }
 
     public void isSegmentationListsPageLoaded(Selenium selenium) {
-        reporting.writeInfo("---> Verify Segmentation Lists Page Loaded");
+        reporting.writeStep("Verify Segmentation Lists Page Loaded");
 
         selenium.waitElementInvisible(waitIndicator);
 
-        reporting.writeInfo("-----> Verify Sign In Page Title is: " + pageTitleText);
+        reporting.writeInfo("Verify Sign In Page Title is: " + pageTitleText);
         if (!selenium.getTitle().contains(pageTitleText)) {
             selenium.throwRuntimeException("Page Title is Not: " + pageTitleText, true);
         } else {
@@ -37,15 +37,15 @@ public class PardotSegmentationLists {
     }
 
     public void clickAddListButton(Selenium selenium) {
-        reporting.writeStep("---> Open List Information");
-        reporting.writeInfo("-----> Click Add List Button");
+        reporting.writeStep("Open List Information");
+        reporting.writeInfo("Click Add List Button");
         selenium.click(addListButton);
     }
 
     public void isListExist(Selenium selenium, String listName) {
-        reporting.writeInfo("---> Verify List Exists");
+        reporting.writeStep("Verify List Exists");
 
-        reporting.writeInfo("-----> Search for List: " + listName);
+        reporting.writeInfo("Search for List: " + listName);
         selenium.clear(listsFilterField);
         selenium.sendKeys(listsFilterField, listName);
 
@@ -64,9 +64,9 @@ public class PardotSegmentationLists {
     }
 
     public void isListNotExist(Selenium selenium, String listName) {
-        reporting.writeInfo("---> Verify List Does Not Exists");
+        reporting.writeStep("Verify List Does Not Exists");
 
-        reporting.writeInfo("-----> Search for List: " + listName);
+        reporting.writeInfo("Search for List: " + listName);
         selenium.clear(listsFilterField);
         selenium.sendKeys(listsFilterField, listName);
 
@@ -84,15 +84,15 @@ public class PardotSegmentationLists {
     }
 
     public void clickList(Selenium selenium, String listName) {
-        reporting.writeStep("---> Select List");
+        reporting.writeStep("Select List");
 
-        reporting.writeInfo("-----> Search for List: " + listName);
+        reporting.writeInfo("Search for List: " + listName);
         selenium.clear(listsFilterField);
         selenium.sendKeys(listsFilterField, listName);
 
         selenium.waitElementInvisible(waitIndicator);
 
-        reporting.writeInfo("-----> Click List");
+        reporting.writeInfo("Click List");
         selenium.click(selenium.findChildElement(listsTable, By.linkText(listName)));
     }
 

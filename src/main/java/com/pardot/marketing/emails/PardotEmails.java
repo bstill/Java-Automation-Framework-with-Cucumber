@@ -16,11 +16,11 @@ public class PardotEmails {
     }
 
     public void isEmailsPageLoaded(Selenium selenium) {
-        reporting.writeInfo("---> Verify Emails Page Loaded");
+        reporting.writeStep("Verify Emails Page Loaded");
 
         selenium.waitElementInvisible(waitIndicator);
 
-        reporting.writeInfo("-----> Verify Emails Page Title is: " + pageTitleText);
+        reporting.writeInfo("Verify Emails Page Title is: " + pageTitleText);
         if (!selenium.getTitle().contains(pageTitleText)) {
             selenium.throwRuntimeException("Page Title is Not: " + pageTitleText, true);
         } else {
@@ -29,9 +29,9 @@ public class PardotEmails {
     }
 
     public void clickSendListEmailButton(Selenium selenium) {
-        reporting.writeStep("---> Open Basic Email Information Modal");
+        reporting.writeStep("Open Basic Email Information Modal");
 
-        reporting.writeInfo("-----> Click Send List Email Button");
+        reporting.writeInfo("Click Send List Email Button");
         selenium.click(sendListEmailButton);
     }
 

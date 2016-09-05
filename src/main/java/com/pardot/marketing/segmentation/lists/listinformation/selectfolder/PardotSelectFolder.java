@@ -29,11 +29,11 @@ public class PardotSelectFolder {
     }
 
     public void isSelectFolderModalLoaded(Selenium selenium) {
-        reporting.writeInfo("---> Verify Select A Folder Loaded");
+        reporting.writeStep("Verify Select A Folder Loaded");
 
         selenium.waitElementInvisible(waitIndicator);
 
-        reporting.writeInfo("-----> Verify Select Folder Modal Title is: " + modalTitleText);
+        reporting.writeInfo("Verify Select Folder Modal Title is: " + modalTitleText);
         if (!selenium.getText(selectFolderModalTitle).equals(modalTitleText)) {
             selenium.throwRuntimeException("Modal Title is Not: " + modalTitleText + "(" + selenium.getText(selectFolderModalTitle) + ")", true);
         } else {
@@ -42,9 +42,9 @@ public class PardotSelectFolder {
     }
 
     public void isFolderExist(Selenium selenium, String folderName) {
-        reporting.writeInfo("---> Verify Folder Exists");
+        reporting.writeStep("Verify Folder Exists");
 
-        reporting.writeInfo("-----> Search for Folder: " + folderName);
+        reporting.writeInfo("Search for Folder: " + folderName);
         selenium.clear(searchFieldClass);
         selenium.sendKeys(searchFieldClass, folderName);
 
@@ -63,9 +63,9 @@ public class PardotSelectFolder {
     }
 
     public void clickFolder(Selenium selenium, String folderName) {
-        reporting.writeStep("---> Select Folder");
+        reporting.writeStep("Select Folder");
 
-        reporting.writeInfo("-----> Search for Folder: " + folderName);
+        reporting.writeInfo("Search for Folder: " + folderName);
         selenium.clear(searchFieldClass);
         selenium.sendKeys(searchFieldClass, folderName);
 
@@ -75,7 +75,7 @@ public class PardotSelectFolder {
 
         for(WebElement e : elements){
             if (e.getText().equals(folderName)) {
-                reporting.writeInfo("-----> Click Folder");
+                reporting.writeInfo("Click Folder");
                 e.click();
                 return;
             }
@@ -85,23 +85,25 @@ public class PardotSelectFolder {
     }
 
     public void clickCreateFolderButton(Selenium selenium) {
-        reporting.writeStep("-----> Click Add Folder Button");
+        reporting.writeStep("Open Add Folder");
+        reporting.writeInfo("Click Add Folder Button");
         selenium.click(addFolderButton);
     }
 
     public void addNewFolder (Selenium selenium, String folderName) {
-        reporting.writeStep("---> Add Folder");
+        reporting.writeStep("Add Folder");
 
-        reporting.writeInfo("-----> Enter Folder Name");
+        reporting.writeInfo("Enter Folder Name");
         selenium.clear(addNewFolderNameField);
         selenium.sendKeys(addNewFolderNameField, folderName);
 
-        reporting.writeInfo("-----> Save Folder");
+        reporting.writeInfo("Save Folder");
         selenium.click(addNewFolderSaveButton);
     }
 
     public void clickChooseSelectedButton(Selenium selenium) {
-        reporting.writeStep("-----> Click Choose Selected Button");
+        reporting.writeStep("Choose Selected Folder");
+        reporting.writeInfo("Click Choose Selected Button");
         selenium.click(chooseSelectedButton);
     }
 

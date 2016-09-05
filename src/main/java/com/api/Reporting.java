@@ -16,6 +16,8 @@ import static com.relevantcodes.extentreports.NetworkMode.OFFLINE;
 public class Reporting {
     private ExtentReports report;
     private ExtentTest testReport;
+    private Integer stepCount = 1;
+
     public String reportPath = ".\\reports\\";
     public String reportFilenameHtml = "Automation_Report.html";
     public String screenshotPath = ".\\reports\\screenshots\\";
@@ -31,7 +33,7 @@ public class Reporting {
     }
 
     public void writeStep(String message) {
-        writeLogEntry(INFO, message);
+        writeLogStepEntry(INFO, message);
     }
 
     public void writeError(String message) {
@@ -84,15 +86,29 @@ public class Reporting {
 
     private void writeLogEntry(LogStatus logStatus, String message) {
         if (logStatus == FAIL) {
-             message = "FAIL: " + message;
-        }
-
-        if (logStatus == FATAL) {
+            message = "FAIL: " + message;
+        } else if (logStatus == FATAL) {
             message = "FATAL: " + message;
+        } else if (logStatus == PASS) {
+            message = "PASS: " + message;
+        } else {
+            message = stepCount.toString() + ". " + message;
+            stepCount  += 1;
         }
 
-        if (logStatus == PASS) {
+        System.out.println(message);
+        testReport.log(logStatus, message);
+    }
+
+    private void writeLogStepEntry(LogStatus logStatus, String message) {
+        if (logStatus == FAIL) {
+             message = "FAIL: " + message;
+        } else if (logStatus == FATAL) {
+            message = "FATAL: " + message;
+        } else if (logStatus == PASS) {
             message = "PASS: " + message;
+        } else {
+            message = "STEP: " + message;
         }
 
         System.out.println(message);
@@ -102,14 +118,13 @@ public class Reporting {
     private void writeLogEntry(LogStatus logStatus, String message, String screenshot) {
         if (logStatus == FAIL) {
             message = "FAIL: " + message;
-        }
-
-        if (logStatus == FATAL) {
+        } else if (logStatus == FATAL) {
             message = "FATAL: " + message;
-        }
-
-        if (logStatus == PASS) {
+        } else if (logStatus == PASS) {
             message = "PASS: " + message;
+        } else {
+            message = stepCount.toString() + ". " + message;
+            stepCount  += 1;
         }
 
         System.out.println(message);
@@ -118,6 +133,8 @@ public class Reporting {
     }
 
     public void startTest(String testName, String description) {
+        stepCount = 1;
+
         testReport = report.startTest(testName, description);
         testReport.log(INFO, "Test Identifier: " + randomUUIDString);
     }

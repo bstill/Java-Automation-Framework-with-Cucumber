@@ -26,11 +26,11 @@ public class PardotListInformation {
     }
 
     public void isListInformationModalLoaded(Selenium selenium) {
-        reporting.writeInfo("---> Verify List Information Loaded");
+        reporting.writeStep("Verify List Information Loaded");
 
         selenium.waitElementInvisible(waitIndicator);
 
-        reporting.writeInfo("-----> Verify List Information Modal Title is: " + modalTitleText);
+        reporting.writeInfo("Verify List Information Modal Title is: " + modalTitleText);
         if (!selenium.getText(listInformationModalTitle).equals(modalTitleText)) {
             selenium.throwRuntimeException("Modal Title is Not: " + modalTitleText, true);
         } else {
@@ -39,16 +39,16 @@ public class PardotListInformation {
     }
 
     public void isListInformationModalPopulated(Selenium selenium, String listName, String folderName) {
-        reporting.writeInfo("---> Verify List Information Populated");
+        reporting.writeStep("Verify List Information Populated");
 
-        reporting.writeInfo("-----> Verify Name Field Value: " + listName);
+        reporting.writeInfo("Verify Name Field Value: " + listName);
         if (!selenium.getAttribute(nameField, "value").equals(listName)) {
             selenium.throwRuntimeException("Name Field Value is Not: " + listName, true);
         } else {
             reporting.writePass("Name Found");
         }
 
-        reporting.writeInfo("-----> Verify Folder Field Value: /" + folderName);
+        reporting.writeInfo("Verify Folder Field Value: /" + folderName);
         if (!selenium.getText(folderField).equals("/" + folderName)) {
             selenium.throwRuntimeException("Folder Field Value is Not: /" + folderName, true);
         } else {
@@ -57,16 +57,16 @@ public class PardotListInformation {
     }
 
     public void isListInformationModalNotPopulated(Selenium selenium) {
-        reporting.writeInfo("---> Verify List Information NOT Populated");
+        reporting.writeStep("Verify List Information NOT Populated");
 
-        reporting.writeInfo("-----> Verify Name Field Value is Blank");
+        reporting.writeInfo("Verify Name Field Value is Blank");
         if (!selenium.getAttribute(nameField, "value").equals("")) {
             selenium.throwRuntimeException("Name Field Value is Not Blank", true);
         } else {
             reporting.writePass("Name Field Blank");
         }
 
-        reporting.writeInfo("-----> Verify Folder Field Value is Default");
+        reporting.writeInfo("Verify Folder Field Value is Default");
         if (!selenium.getText(folderField).equals("/Uncategorized/Lists")) {
             selenium.throwRuntimeException("Folder Field Value is Not Default", true);
         } else {
@@ -75,14 +75,15 @@ public class PardotListInformation {
     }
 
     public void clickChooseFolderButton(Selenium selenium) {
-        reporting.writeStep("---> Click Choose Folder Button");
+        reporting.writeStep("Choose Folder");
+        reporting.writeInfo("Click Choose Folder Button");
         selenium.click(chooseFolderButton);
     }
 
     public void isFolderSelected(Selenium selenium, String folderName) {
-        reporting.writeInfo("---> Verify Folder Field Contains Selected Folder");
+        reporting.writeStep("Verify Folder Field Contains Selected Folder");
 
-        reporting.writeInfo("-----> Verify Folder Field Value: /" + folderName);
+        reporting.writeInfo("Verify Folder Field Value: /" + folderName);
         if (!selenium.getText(folderField).equals("/" + folderName)) {
             selenium.throwRuntimeException("Folder Field Value is Not: /" + folderName, true);
         } else {
@@ -91,29 +92,30 @@ public class PardotListInformation {
     }
 
     public void createList(Selenium selenium, String listName) {
-        reporting.writeStep("---> Create/Edit Segmentation List");
+        reporting.writeStep("Create/Edit Segmentation List");
 
-        reporting.writeInfo("-----> Enter List Name: " + listName);
+        reporting.writeInfo("Enter List Name: " + listName);
         selenium.clear(nameField);
         selenium.sendKeys(nameField, listName);
     }
 
     public void saveList(Selenium selenium) {
-        reporting.writeStep("---> Save Segmentation List");
+        reporting.writeStep("Save Segmentation List");
+        reporting.writeInfo("Click Create List Button");
         selenium.click(createListButton);
     }
 
     public void isListInformationDuplicateNameErrorDisplayed(Selenium selenium) {
-        reporting.writeInfo("---> Verify List Information Duplicate Name Error Displayed");
+        reporting.writeStep("Verify List Information Duplicate Name Error Displayed");
 
-        reporting.writeInfo("-----> Verify Header Error Message is: " + createListErrorHeaderText);
+        reporting.writeInfo("Verify Header Error Message is: " + createListErrorHeaderText);
         if (!selenium.getText(createListErrorHeader).equals(createListErrorHeaderText)) {
             selenium.throwRuntimeException("Header Error Message is Not: " + createListErrorHeaderText, true);
         } else {
             reporting.writePass("Header Error Message Found");
         }
 
-        reporting.writeInfo("-----> Verify Name Error Message is: " + createListDuplicateErrorText);
+        reporting.writeInfo("Verify Name Error Message is: " + createListDuplicateErrorText);
         if (!selenium.getText(createListErrorName).equals(createListDuplicateErrorText)) {
             selenium.throwRuntimeException("Name Error Message is Not: " + createListDuplicateErrorText, true);
         } else {

@@ -116,7 +116,7 @@ public class RestApi {
 
 
     public String getServerResponse_old() throws IOException {
-        reporting.writeStep("---> Read Server Response");
+        reporting.writeStep("Read Server Response");
         http.openScanner();
         String response =  http.readScanner();
         http.closeScanner();
@@ -125,22 +125,22 @@ public class RestApi {
     }
 
     public void openJson(String jsonString) {
-        reporting.writeStep("---> Open JSON Object");
+        reporting.writeStep("Open JSON Object");
         json.open(jsonString);
     }
 
     public void openJsonRootArray(String key){
-        reporting.writeStep("---> Open JSON Root Array: " + key);
+        reporting.writeStep("Open JSON Root Array: " + key);
         json.getRootArray(key);
     }
 
     public void openJsonArray(String key){
-        reporting.writeStep("---> Open JSON Array: " + key);
+        reporting.writeStep("Open JSON Array: " + key);
         json.getArray(key);
     }
 
     public void isJsonValue(String key, String expectedValue) {
-        reporting.writeStep("---> Verify JSON Value is Expected: " + key + ": " + expectedValue);
+        reporting.writeStep("Verify JSON Value is Expected: " + key + ": " + expectedValue);
 
         Boolean isFound = false;
 
@@ -159,7 +159,7 @@ public class RestApi {
     }
 
     public void isJsonValue(String expectedValue) {
-        reporting.writeStep("---> Verify JSON Value is Expected: " + expectedValue);
+        reporting.writeStep("Verify JSON Value is Expected: " + expectedValue);
 
         Boolean isFound = false;
 

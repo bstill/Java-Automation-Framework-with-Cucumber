@@ -21,11 +21,11 @@ public class PardotSegmentationList {
     }
 
     public void isListPageLoaded(Selenium selenium, String pageTitleText) {
-        reporting.writeInfo("---> Verify List Page Loaded");
+        reporting.writeStep("Verify List Page Loaded");
 
         selenium.waitElementInvisible(waitIndicator);
 
-        reporting.writeInfo("-----> Verify List Page Title is: " + pageTitleText);
+        reporting.writeInfo("Verify List Page Title is: " + pageTitleText);
         if (!selenium.getTitle().contains(pageTitleText)) {
             selenium.throwRuntimeException("Page Title is Not: " + pageTitleText, true);
         } else {
@@ -34,15 +34,15 @@ public class PardotSegmentationList {
     }
 
     public void clickEditListLink(Selenium selenium) {
-        reporting.writeStep("---> Open List Information");
+        reporting.writeStep("Open List Information");
 
-        reporting.writeInfo("-----> Click Edit List Button");
+        reporting.writeInfo("Click Edit List Button");
         selenium.click(editListLink);
     }
 
     public void isListProspectExist(Selenium selenium, String prospectName) {
-        reporting.writeInfo("---> Verify Prospect Added to List: " + prospectName);
-
+        reporting.writeStep("Chick Prospect Added");
+        reporting.writeInfo("Verify Prospect Added to List: " + prospectName);
         List<WebElement> elements = selenium.findElements(listsContainer, By.tagName("tr"));
 
         for(WebElement e : elements){
