@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="7" failures="0" name="cucumber.test.TestRunner" time="233.036" errors="0" skipped="0">
+<testsuite tests="9" failures="0" name="cucumber.test.TestRunner" time="563.406" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2016.2.3"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -63,11 +63,13 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="Scenario: Pardot Coding Exercise: Create New List" name="Given I am logged into Pardot" time="0.002"/>
-  <testcase classname="Scenario: Pardot Coding Exercise: Create New List" name="When I navigate to the Segmentation Lists page" time="0"/>
-  <testcase classname="Scenario: Pardot Coding Exercise: Create New List" name="And I open the Add List modal for a new list" time="0"/>
-  <testcase classname="Scenario: Pardot Coding Exercise: Create New List" name="And I add the Segmentation List name \&quot;Random\&quot; with a \&quot;New\&quot; folder" time="0"/>
-  <testcase classname="Scenario: Pardot Coding Exercise: Create New List" name="And I save the Segmentation List" time="0"/>
-  <testcase classname="Scenario: Pardot Coding Exercise: Create New List" name="Then the Segmentation List is created" time="0"/>
-  <testcase classname="Scenario: Pardot Coding Exercise: Create New List" name="Scenario: Pardot Coding Exercise: Create New List" time="13.473"/>
+  <testcase classname="Scenario: Pardot Coding Exercise: Create New Segmentation List" name="Given I am logged into Pardot" time="0.001"/>
+  <testcase classname="Scenario: Pardot Coding Exercise: Create New Segmentation List" name="When I add the Segmentation List name \&quot;Random\&quot; with a \&quot;New\&quot; folder" time="0"/>
+  <testcase classname="Scenario: Pardot Coding Exercise: Create New Segmentation List" name="Then the Segmentation List is created" time="0"/>
+  <testcase classname="Scenario: Pardot Coding Exercise: Create New Segmentation List" name="Scenario: Pardot Coding Exercise: Create New Segmentation List" time="15.383"/>
+  <testcase classname="Scenario: Pardot Coding Exercise: Create Duplicate Segmentation List" name="Given I am logged into Pardot" time="0.002"/>
+  <testcase classname="Scenario: Pardot Coding Exercise: Create Duplicate Segmentation List" name="When I add the Segmentation List name \&quot;Random\&quot; with a \&quot;New\&quot; folder" time="0"/>
+  <testcase classname="Scenario: Pardot Coding Exercise: Create Duplicate Segmentation List" name="And I add the Segmentation List name \&quot;Duplicate\&quot; with a \&quot;Duplicate\&quot; folder" time="0"/>
+  <testcase classname="Scenario: Pardot Coding Exercise: Create Duplicate Segmentation List" name="Then the Segmentation List is flagged as Duplicate" time="0"/>
+  <testcase classname="Scenario: Pardot Coding Exercise: Create Duplicate Segmentation List" name="Scenario: Pardot Coding Exercise: Create Duplicate Segmentation List" time="13.376"/>
 </testsuite>

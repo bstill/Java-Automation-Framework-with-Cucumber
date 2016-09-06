@@ -112,33 +112,31 @@ public class TestSteps {
         dashboard.isDashboardPageLoaded(selenium);
     }
 
-    @When("^I navigate to the Segmentation Lists page$")
-    public void goSegmentationListsPage() throws InterruptedException {
+    @When("^I add the Segmentation List name \"([^\"]*)\" with a \"([^\"]*)\" folder$")
+    public void createNewSegmentationList(String listName, String folderName) throws InterruptedException {
         dashboard.clickMarketingSegmentationLists(selenium);
         segmentationLists.isSegmentationListsPageLoaded(selenium);
-    }
 
-    @And("^I open the Add List modal for a new list$")
-    public void openAddSegmentationListModalNew() {
         segmentationLists.clickAddListButton(selenium);
         segmentationListInformation.isListInformationModalLoaded(selenium);
         segmentationListInformation.isListInformationModalNotPopulated(selenium);
-    }
 
-    @And("^I add the Segmentation List name \"([^\"]*)\" with a \"([^\"]*)\" folder$")
-    public void createNewSegmentationList(String listName, String folderStatus) {
         if (listName.toUpperCase().equals("RANDOM")) {
             list = random.getRandomStringAlpha(20);
+        } else if (!listName.toUpperCase().equals("DUPLICATE")) {
+            list = listName;
         }
         segmentationListInformation.createList(selenium, list);
 
         segmentationListInformation.clickChooseFolderButton(selenium);
         selectFolder.isSelectFolderModalLoaded(selenium);
 
-        if (folderStatus.toUpperCase().equals("NEW")) {
+        if (folderName.toUpperCase().equals("NEW")) {
             folder = random.getRandomStringAlpha(10);
             selectFolder.clickCreateFolderButton(selenium);
             selectFolder.addNewFolder(selenium, folder);
+        }else if (!folderName.toUpperCase().equals("DUPLICATE")) {
+            folder = folderName;
         }
 
         selectFolder.clickFolder(selenium, folder);
@@ -146,15 +144,12 @@ public class TestSteps {
 
         segmentationListInformation.isListInformationModalLoaded(selenium);
         segmentationListInformation.isFolderSelected(selenium, folder);
-    }
 
-    @And("^I save the Segmentation List$")
-    public void saveSegmentationList() {
         segmentationListInformation.saveList(selenium);
     }
 
     @Then("^the Segmentation List is created$")
-    public void isSegmentationListExist() throws InterruptedException {
+    public void isSegmentationListCreated() throws InterruptedException {
         segmentationList.isListPageLoaded(selenium, list);
         dashboard.clickMarketingSegmentationLists(selenium);
 
@@ -162,10 +157,13 @@ public class TestSteps {
         segmentationLists.isListExist(selenium, list);
     }
 
+    @Then("^the Segmentation List is flagged as Duplicate$")
+    public void isSegmentationListDuplicate() throws InterruptedException {
+        segmentationListInformation.isListInformationDuplicateNameErrorDisplayed(selenium);
 
-
-
-
+        //close modal
+        segmentationListInformation.cancelList(selenium);
+    }
 
 
 

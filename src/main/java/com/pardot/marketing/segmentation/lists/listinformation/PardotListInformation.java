@@ -9,6 +9,7 @@ public class PardotListInformation {
     private By nameField = By.name("name");
     private By folderField = By.xpath(".//*[@id='li_form_update']/div[2]/div/div[1]/span[2]");
     private By createListButton = By.id("save_information");
+    private By cancelButton = By.linkText("Cancel");
     private By listInformationModalTitle = By.id("myModalLabel");
     private String modalTitleText = "List Information";
     private By chooseFolderButton = By.xpath(".//*[@id='li_form_update']/div[2]/div/div[1]/button");
@@ -103,6 +104,12 @@ public class PardotListInformation {
         reporting.writeStep("Save Segmentation List");
         reporting.writeInfo("Click Create List Button");
         selenium.click(createListButton);
+    }
+
+    public void cancelList(Selenium selenium) {
+        reporting.writeStep("Cancel Segmentation List");
+        reporting.writeInfo("Click Cancel Button");
+        selenium.click(cancelButton);
     }
 
     public void isListInformationDuplicateNameErrorDisplayed(Selenium selenium) {
