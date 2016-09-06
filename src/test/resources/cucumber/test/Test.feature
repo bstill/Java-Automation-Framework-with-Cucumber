@@ -12,7 +12,7 @@ Feature: Pardot Test
 9.	Send a text only email to the list (Marketing > Emails)  *Please note, email is disabled in this account so you will not actually be able to send the email.  This is okay.
 10.	Log out
 
-    Scenario: Pardot Coding Exercise: Create New Segmentation List
+    Scenario: Pardot Coding Exercise: Create Segmentation List
         Given I am logged into Pardot
         When I add the Segmentation List name "Random" with a "New" folder
         Then the Segmentation List is created
@@ -22,3 +22,11 @@ Feature: Pardot Test
         When I add the Segmentation List name "Random" with a "New" folder
             And I add the Segmentation List name "Duplicate" with a "Duplicate" folder
         Then the Segmentation List is flagged as Duplicate
+
+    Scenario: Pardot Coding Exercise: Edit Segmentation List
+        Given I am logged into Pardot
+        When I add the Segmentation List name "Random" with a "New" folder
+            And I edit the Segmentation List name "Random" with a "Duplicate" folder
+        Then the Segmentation List is created
+
+    
