@@ -115,9 +115,6 @@ public class PardotListInformation {
     public void isListInformationDuplicateNameErrorDisplayed(Selenium selenium) {
         reporting.writeStep("Verify List Information Duplicate Name Error Displayed");
 
-        selenium.waitElementInvisible(createListErrorHeader);
-        selenium.waitElementInvisible(createListErrorName);
-
         reporting.writeInfo("Verify Header Error Message is: " + createListErrorHeaderText);
         if (!selenium.getText(createListErrorHeader).equals(createListErrorHeaderText)) {
             selenium.throwRuntimeException("Header Error Message is Not: " + createListErrorHeaderText, true);

@@ -28,5 +28,11 @@ Feature: Pardot Test
         When I add the Segmentation List name "Random" with a "New" folder
             And I edit the Segmentation List name "Random" with a "Duplicate" folder
         Then the Segmentation List is created
+            And the original Segmentation List does not Exist
 
-    
+    Scenario: Pardot Coding Exercise: Create Segmentation List Using Previous List Name
+        Given I am logged into Pardot
+        When I add the Segmentation List name "Random" with a "New" folder
+            And I edit the Segmentation List name "Random" with a "Duplicate" folder
+            And I add the Segmentation List name "Previous" with a "Duplicate" folder
+        Then the Segmentation List is created

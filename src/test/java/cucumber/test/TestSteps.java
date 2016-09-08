@@ -40,6 +40,7 @@ public class TestSteps {
 
     private String folder;
     private String list;
+    private String previousList;
 
     private RandomData random;
 
@@ -89,6 +90,8 @@ public class TestSteps {
 
         selenium = null;
 
+        previousList = null;
+
         selenium = browser.startBrowser(pardotUrl);
         login.isLogInPageLoaded(selenium);
         login.loginPardot(selenium, pardotUsername, pardotPassword);
@@ -123,7 +126,11 @@ public class TestSteps {
 
         if (listName.toUpperCase().equals("RANDOM")) {
             list = random.getRandomStringAlpha(20);
-        } else if (!listName.toUpperCase().equals("DUPLICATE")) {
+        } else if (listName.toUpperCase().equals("PREVIOUS")) {
+            list = previousList;
+        } else if (listName.toUpperCase().equals("DUPLICATE")) {
+
+        } else {
             list = listName;
         }
         segmentationListInformation.createList(selenium, list);
@@ -160,8 +167,13 @@ public class TestSteps {
         segmentationListInformation.isListInformationModalPopulated(selenium, list, folder);
 
         if (listName.toUpperCase().equals("RANDOM")) {
+            previousList = list;
             list = random.getRandomStringAlpha(20);
-        } else if (!listName.toUpperCase().equals("DUPLICATE")) {
+        } else if (listName.toUpperCase().equals("PREVIOUS")) {
+            list = previousList;
+        } else if (listName.toUpperCase().equals("DUPLICATE")) {
+
+        } else {
             list = listName;
         }
         segmentationListInformation.createList(selenium, list);
@@ -195,9 +207,13 @@ public class TestSteps {
         segmentationLists.isListExist(selenium, list);
     }
 
+    @Then("^the original Segmentation List does not Exist$")
+    public void isOriginalSegmentationListRemoved() throws InterruptedException {
+        segmentationLists.isListNotExist(selenium, previousList);
+    }
+
     @Then("^the Segmentation List is flagged as Duplicate$")
     public void isSegmentationListDuplicate() throws InterruptedException {
-
         segmentationListInformation.isListInformationDuplicateNameErrorDisplayed(selenium);
 
         //close modal
