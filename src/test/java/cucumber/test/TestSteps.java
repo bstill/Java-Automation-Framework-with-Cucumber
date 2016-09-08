@@ -42,6 +42,11 @@ public class TestSteps {
     private String list;
     private String previousList;
 
+    private String firstName;
+    private String lastName;
+    private String emailAddress;
+    private String score;
+
     private RandomData random;
 
     private PardotBrowser browser;
@@ -218,6 +223,66 @@ public class TestSteps {
 
         //close modal
         segmentationListInformation.cancelList(selenium);
+    }
+
+    @When("^I add a Prospect with a First Name \"([^\"]*)\" a Last Name \\\"([^\\\"]*)\\\" an Email \\\"([^\\\"]*)\\\" a Score \"([^\"]*)\"$")
+    public void createProspect(String firstName, String lastName, String emailAddress, String score) throws InterruptedException {
+        dashboard.clickProspectsProspectList(selenium);
+        prospects.isProspectsPageLoaded(selenium);
+
+        prospects.clickAddProspectButton(selenium);
+        createProspect.isCreateProspectPageLoaded(selenium);
+
+        if (firstName.toUpperCase().equals("RANDOM")) {
+            this.firstName = random.getRandomStringAlpha(8);
+        } else {
+            this.firstName = firstName;
+        }
+
+        if (lastName.toUpperCase().equals("RANDOM")) {
+            this.lastName = random.getRandomStringAlpha(8);
+        } else {
+            this.lastName = lastName;
+        }
+
+        if (emailAddress.toUpperCase().equals("RANDOM")) {
+            this.emailAddress = random.getRandomStringAlpha(8) + "@" + random.getRandomStringAlpha(8) + ".com";
+        } else {
+            this.emailAddress = emailAddress;
+        }
+
+        if (score.toUpperCase().equals("RANDOM")) {
+            this.score = random.getRandomStringNumeric(2);
+        } else {
+            this.score = score;
+        }
+
+        createProspect.createProspect(selenium, this.firstName, this.lastName, this.emailAddress, this.score, list);
+    }
+
+    @Then("^the Prospect is created$")
+    public void isProspectCreated() throws InterruptedException {
+        createProspect.clickCreateProspectButton(selenium);
+        prospect.isProspectPageLoaded(selenium, this.firstName + " " + this.lastName);
+
+        prospect.clickListsMenu(selenium);
+        prospectLists.isProspectListsPageLoaded(selenium);
+        prospectLists.isProspectListExist(selenium, list);
+
+        dashboard.clickProspectsProspectList(selenium);
+        prospects.isProspectsPageLoaded(selenium);
+
+        prospects.isProspectExist(selenium, this.firstName + " " + this.lastName);
+    }
+
+    @Then("^the Prospect is added to the Segmentation List$")
+    public void isProspectAddedToSegmentationList() throws InterruptedException {
+        dashboard.clickMarketingSegmentationLists(selenium);
+        segmentationLists.isSegmentationListsPageLoaded(selenium);
+
+        segmentationLists.clickList(selenium, list);
+        segmentationList.isListPageLoaded(selenium, list);
+        segmentationList.isListProspectExist(selenium, this.firstName + " " + this.lastName);
     }
 
 

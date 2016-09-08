@@ -1,7 +1,7 @@
 
 Feature: Pardot Test
 
-1.	Log in to Pardot (https://pi.pardot.com, Username: pardot.applicant@pardot.com, Password: Applicant2012)
+1.	Log in to Pardot (https:pi.pardot.com, Username: pardot.applicant@pardot.com, Password: Applicant2012)
 2.	Create a list with a random name (Marketing > Segmentation > Lists)
 3.	Attempt to create another list with that same name and ensure the system correctly gives a validation failure
 4.	Rename the original list
@@ -17,7 +17,7 @@ Feature: Pardot Test
         When I add the Segmentation List name "Random" with a "New" folder
         Then the Segmentation List is created
 
-    Scenario: Pardot Coding Exercise: Create Duplicate Segmentation List
+    Scenario: Pardot Coding Exercise: Attempt to Create Duplicate Segmentation List
         Given I am logged into Pardot
         When I add the Segmentation List name "Random" with a "New" folder
             And I add the Segmentation List name "Duplicate" with a "Duplicate" folder
@@ -36,3 +36,11 @@ Feature: Pardot Test
             And I edit the Segmentation List name "Random" with a "Duplicate" folder
             And I add the Segmentation List name "Previous" with a "Duplicate" folder
         Then the Segmentation List is created
+
+    Scenario: Pardot Coding Exercise: Create Prospect and Add to Segmentation List
+        Given I am logged into Pardot
+        When I add the Segmentation List name "Random" with a "New" folder
+            And I add a Prospect with a First Name "Random" a Last Name "Random" an Email "Random" a Score "Random"
+        Then the Prospect is created
+            And the Prospect is added to the Segmentation List
+
