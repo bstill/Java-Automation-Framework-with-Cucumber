@@ -129,15 +129,30 @@ public class TestSteps {
         segmentationListInformation.isListInformationModalLoaded(selenium);
         segmentationListInformation.isListInformationModalNotPopulated(selenium);
 
-        if (listName.toUpperCase().equals("RANDOM")) {
-            list = random.getRandomStringAlpha(20);
-        } else if (listName.toUpperCase().equals("PREVIOUS")) {
-            list = previousList;
-        } else if (listName.toUpperCase().equals("DUPLICATE")) {
-
-        } else {
-            list = listName;
+        switch (listName.toUpperCase())
+        {
+            case "RANDOM":
+                list = random.getRandomStringAlpha(20);
+                break;
+            case "PREVIOUS":
+                list = previousList;
+                break;
+            case "DUPLICATE":
+                break;
+            default:
+                list = listName;
+                break;
         }
+
+
+        //if (listName.toUpperCase().equals("RANDOM")) {
+        //    list = random.getRandomStringAlpha(20);
+        //} else if (listName.toUpperCase().equals("PREVIOUS")) {
+        //    list = previousList;
+        //} else if (listName.toUpperCase().equals("DUPLICATE")) {
+        //} else {
+        //    list = listName;
+        //}
         segmentationListInformation.createList(selenium, list);
 
         segmentationListInformation.clickChooseFolderButton(selenium);
@@ -171,16 +186,30 @@ public class TestSteps {
         segmentationListInformation.isListInformationModalLoaded(selenium);
         segmentationListInformation.isListInformationModalPopulated(selenium, list, folder);
 
-        if (listName.toUpperCase().equals("RANDOM")) {
-            previousList = list;
-            list = random.getRandomStringAlpha(20);
-        } else if (listName.toUpperCase().equals("PREVIOUS")) {
-            list = previousList;
-        } else if (listName.toUpperCase().equals("DUPLICATE")) {
-
-        } else {
-            list = listName;
+        switch (listName.toUpperCase())
+        {
+            case "RANDOM":
+                list = random.getRandomStringAlpha(20);
+                break;
+            case "PREVIOUS":
+                list = previousList;
+                break;
+            case "DUPLICATE":
+                break;
+            default:
+                list = listName;
+                break;
         }
+
+        //if (listName.toUpperCase().equals("RANDOM")) {
+        //    previousList = list;
+        //    list = random.getRandomStringAlpha(20);
+        //} else if (listName.toUpperCase().equals("PREVIOUS")) {
+        //    list = previousList;
+        //} else if (listName.toUpperCase().equals("DUPLICATE")) {
+        //} else {
+        //    list = listName;
+        //}
         segmentationListInformation.createList(selenium, list);
 
         segmentationListInformation.clickChooseFolderButton(selenium);
