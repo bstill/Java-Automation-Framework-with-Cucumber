@@ -9,8 +9,6 @@ Feature: Pardot Test
 6.	Create a new prospect (Prospect > Prospect List)
 7.	Add your new prospect to the newly created list
 8.	Ensure the new prospect is successfully added to the list upon save
-9.	Send a text only email to the list (Marketing > Emails)  *Please note, email is disabled in this account so you will not actually be able to send the email.  This is okay.
-10.	Log out
 
     Scenario: Pardot Coding Exercise: Create Segmentation List
         Given I am logged into Pardot
